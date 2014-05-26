@@ -41,6 +41,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 	       classpath:emg/demos/spring/web/config/dao-context.xml
+	       classpath:emg/demos/spring/web/config/service-context.xml
 	    </param-value>
 	</context-param>
 </web-app>

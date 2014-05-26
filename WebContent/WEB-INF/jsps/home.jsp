@@ -66,5 +66,29 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<p />
+	<table class="table table-striped table-bordered">
+        <tr>
+            <th colspan="2">MySQL Query Dao - Service</th>
+        </tr>
+        <c:forEach var="row" items="${offers}">
+            <tr class="info">
+                <td>ID:</td>
+                <td>${row.id}</td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>${row.name}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>${row.email}</td>
+            </tr>
+            <tr>
+                <td>Text:</td>
+                <td>${row.text}</td>
+            </tr>
+        </c:forEach>
+    </table>
 </body>
 </html>
