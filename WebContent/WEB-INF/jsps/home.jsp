@@ -19,34 +19,33 @@
 <title>Hello Jsp</title>
 </head>
 <body>
-	Hi There
-	<p>
-		<!-- usando session - no recomendado-->
-		Session [no recomendado]:
-		<%=session.getAttribute("name")%>
-	</p>
-	<p>
-		<!-- usando request - no recomendado -->
-		Request [no recomendado]:
-		<%=request.getAttribute("name")%>
-		<%-- request es un objeto interno --%>
-	</p>
-	<p>
-		<!-- usando expression language -->
-		Expression Language: ${name}
-	</p>
-	<p>
-		<!-- usando jstl -->
-		Jsp Standard Tag Library:
-		<c:out value="${name}"></c:out>
-	</p>
-
+	<table class="table table-striped table-bordered">
+		<tr>
+			<th colspan="2">Recibiendo Valores del Controller</th>
+		</tr>
+		<tr class="danger">
+			<td>Session [no recomendado]:</td>
+			<td><%=session.getAttribute("name")%></td>
+		</tr>
+		<tr class="danger">
+			<td>Request [no recomendado]:</td>
+			<td><%=request.getAttribute("name")%></td>
+		</tr>
+		<tr class="warning">
+			<td>Expression Language:</td>
+			<td>${name}</td>
+		</tr>
+		<tr class="success">
+			<td>Jsp Standard Tag Library:</td>
+			<td><c:out value="${name}"></c:out></td>
+		</tr>
+	</table>
 	<sql:query var="rs" dataSource="jdbc/spring">
         select id, name, email, text from offers
     </sql:query>
 	<table class="table table-striped table-bordered">
 		<tr>
-			<th colspan="2">Offers</th>
+			<th colspan="2">MySQL Query (jstl-sql)</th>
 		</tr>
 		<c:forEach var="row" items="${rs.rows}">
 			<tr class="info">
