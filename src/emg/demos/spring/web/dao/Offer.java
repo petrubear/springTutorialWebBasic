@@ -1,13 +1,21 @@
 package emg.demos.spring.web.dao;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class Offer {
 
 	private int id;
+	@Size(min = 5, max = 20, message = "[name] Debe ser de tamaño 5 - 20!")
+	// validaciones (hibernate validation)
 	private String name;
+	@Pattern(regexp=".*\\@.*\\..*", message="Ingrese un email valido")
+	@NotNull
 	private String email;
+	@Size(min = 5, max = 100, message = "[text] Debe ser de tamaño 5 - 100!")
 	private String text;
 
-	
 	public Offer() {
 		super();
 	}
