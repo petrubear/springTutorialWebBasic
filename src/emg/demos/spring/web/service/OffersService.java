@@ -21,4 +21,12 @@ public class OffersService {
 		this.offerDao = offerDao;
 	}
 
+	public void create(Offer offer) {
+		this.offerDao.create(offer);
+	}
+
+	public void throwExceptionTest() {
+		this.offerDao.getOffer(9000000);
+	}
+
 }

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -8,11 +8,12 @@
 <head>
 <!-- bootstrap CSS -->
 <link rel="stylesheet"
-    href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
+	href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Offers Home</title>
 </head>
 <body>
+	<!-- 
     <table class="table table-striped table-bordered">
         <tr>
             <th colspan="2">Recibiendo Valores del Controller</th>
@@ -61,28 +62,28 @@
         </c:forEach>
     </table>
     <p />
-    <table class="table table-striped table-bordered">
-        <tr>
-            <th colspan="2">MySQL Query Dao - Service</th>
-        </tr>
-        <c:forEach var="row" items="${offers}">
-            <tr class="info">
-                <td>ID:</td>
-                <td>${row.id}</td>
-            </tr>
-            <tr>
-                <td>Name:</td>
-                <td>${row.name}</td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td>${row.email}</td>
-            </tr>
-            <tr>
-                <td>Text:</td>
-                <td>${row.text}</td>
-            </tr>
-        </c:forEach>
-    </table>
+     -->
+	<table class="table table-striped table-bordered">
+		<tr>
+			<th colspan="4">MySQL Query Dao - Service</th>
+		</tr>
+		<tr>
+			<th class="info">ID:</th>
+			<th>Name:</th>
+			<th>Email:</th>
+			<th>Text:</th>
+		</tr>
+
+		<c:forEach var="row" items="${offers}">
+			<tr>
+				<td class="info">${row.id}</td>
+				<td>${row.name}</td>
+				<td>${row.email}</td>
+				<td>${row.text}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/">Volver</a>
 </body>
 </html>

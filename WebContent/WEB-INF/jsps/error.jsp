@@ -6,11 +6,11 @@
 <!-- bootstrap CSS -->
 <link rel="stylesheet"
     href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Offer Created</title>
+<title>Error</title>
 </head>
 <body>
-<h1>Offer Created.</h1>
-<a class="btn btn-primary" href="${pageContext.request.contextPath}/offers">View Offers</a>
+Se ha capturado un error inesperado.
 </body>
 </html>
