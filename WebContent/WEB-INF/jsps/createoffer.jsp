@@ -38,7 +38,7 @@
 			<tr>
 				<td colspan="2" align="left"><input class="btn btn-primary"
 					value="Create" type="submit" />  <a class="btn btn-primary"
-					href="${pageContext.request.contextPath}/">Back</a></td>
+					href="${pageContext.request.contextPath}/">Home</a></td>
 			</tr>
 		</table>
 	</sf:form>

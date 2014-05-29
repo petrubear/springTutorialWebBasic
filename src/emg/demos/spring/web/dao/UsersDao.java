@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 //import org.springframework.jdbc.core.JdbcTemplate;
 
 @Component("usersDao")
-public class UsersDAO {
+public class UsersDao {
 	// private JdbcTemplate jdbc;
 	private NamedParameterJdbcTemplate jdbc;
 
@@ -24,7 +24,7 @@ public class UsersDAO {
 		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(
 				user);
 
-		String sqlQuery = "insert into `users` (`username`, `password`) values (:username,:password);";
+		String sqlQuery = "insert into `users` (`username`, `password`, `email`) values (:username,:password,:email);";
 		String sqlQuery2 = "insert into `authorities` (`username`, `authority`) values (:username,:authority);";
 		jdbc.update(sqlQuery, params);
 		return jdbc.update(sqlQuery2, params) == 1;

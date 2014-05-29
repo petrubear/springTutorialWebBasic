@@ -9,9 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import emg.demos.spring.web.dao.Offer;
 import emg.demos.spring.web.dao.User;
-import emg.demos.spring.web.service.OffersService;
 import emg.demos.spring.web.service.UsersService;
 
 @Controller

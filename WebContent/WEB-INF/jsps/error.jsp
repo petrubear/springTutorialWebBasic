@@ -10,6 +10,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Error</title>
 </head>
-<body>An error has occurred.
+<body>
+	<div class="panel panel-danger">
+		<!-- Default panel contents -->
+		<div class="panel-heading">An error has occurred.</div>
+		<div class="panel-body">
+			<p>${description}</p>
+		</div>
+	</div>
 </body>
 </html>

@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import emg.demos.spring.web.dao.User;
-import emg.demos.spring.web.dao.UsersDAO;
+import emg.demos.spring.web.dao.UsersDao;
 
 @Service("usersService")
 public class UsersService {
-	private UsersDAO usersDao;
+	private UsersDao usersDao;
 
 	@Autowired
-	public void setUsersDao(UsersDAO usersDao) {
+	public void setUsersDao(UsersDao usersDao) {
 		this.usersDao = usersDao;
 	}
 

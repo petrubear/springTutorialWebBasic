@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component("offerDao")
-public class OfferDAO {
+public class OfferDao {
 	// private JdbcTemplate jdbc;
 	private NamedParameterJdbcTemplate jdbc;
 

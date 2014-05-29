@@ -6,18 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import emg.demos.spring.web.dao.Offer;
-import emg.demos.spring.web.dao.OfferDAO;
+import emg.demos.spring.web.dao.OfferDao;
 
 @Service("offersService")
 public class OffersService {
-	private OfferDAO offerDao;
+	private OfferDao offerDao;
 
 	public List<Offer> getCurrent() {
 		return offerDao.getOffers();
 	}
 
 	@Autowired
-	public void setOfferDao(OfferDAO offerDao) {
+	public void setOfferDao(OfferDao offerDao) {
 		this.offerDao = offerDao;
 	}
 
