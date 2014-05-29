@@ -22,22 +22,21 @@
 			<tr>
 				<td>Name:</td>
 				<td><sf:input path="name" name="name" type="text" /> <br /> <sf:errors
-						path="name"></sf:errors></td>
+						path="name" cssClass="text-danger"></sf:errors></td>
 			</tr>
 			<tr>
 				<td>Email:</td>
 				<td><sf:input path="email" name="email" type="text" /> <br />
-
-					<sf:errors path="email"></sf:errors></td>
+					<sf:errors path="email" cssClass="text-danger"></sf:errors></td>
 			</tr>
 			<tr>
 				<td>Offer:</td>
 				<td><sf:textarea path="text" name="text" rows="3" cols="40"></sf:textarea>
-					<br /> <sf:errors path="text"></sf:errors></td>
+					<br /> <sf:errors path="text" cssClass="text-danger"></sf:errors></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="left"><input class="btn btn-primary"
-					value="Create" type="submit" />  <a class="btn btn-primary"
+					value="Create" type="submit" /> <a class="btn btn-primary"
 					href="${pageContext.request.contextPath}/">Home</a></td>
 			</tr>
 		</table>
