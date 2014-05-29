@@ -6,13 +6,17 @@
 
 
 	<security:authentication-manager>
-		<security:authentication-provider>
+		<!-- <security:authentication-provider>
 			<security:user-service>
 				<security:user name="edison" authorities="admin"
 					password="edison" />
 				<security:user name="zorg" authorities="admin"
 					password="zorg" />
 			</security:user-service>
+		</security:authentication-provider>-->
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 	<security:http use-expressions="true"> <!-- match de arriba hacia abajo -->
@@ -23,13 +27,15 @@
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/offercreated"
 			access="isAuthenticated()" />
-		<security:intercept-url pattern="/login" access="permitAll" />
+		<security:intercept-url pattern="/login"
+			access="permitAll" />
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/offers"
 			access="permitAll" />
 		<security:intercept-url pattern="/static/**"
 			access="permitAll" />
 		<security:intercept-url pattern="/**" access="denyAll" />
-		<security:form-login login-page="/login" />
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login?error=true" />
 	</security:http>
 </beans>
