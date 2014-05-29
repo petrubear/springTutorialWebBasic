@@ -84,6 +84,6 @@
 		</c:forEach>
 	</table>
 	
-	<a class="btn btn-primary" href="${pageContext.request.contextPath}/">Volver</a>
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/">Back</a>
 </body>
 </html>
