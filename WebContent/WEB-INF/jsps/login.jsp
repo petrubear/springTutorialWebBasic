@@ -41,7 +41,11 @@
 			</div>
 		</div>
 		<input name="submit" type="submit" value="Login"
-			class="btn btn-primary" />
+			class="btn btn-primary" /> 
+			<!-- <a class="btn btn-primary"
+            href="${pageContext.request.contextPath}/newaccount">View Offers</a> -->
+            <a class="btn btn-primary"
+            href="<c:url value="/newaccount"/>">New Account</a>
 	</form>
 </body>
 </html>

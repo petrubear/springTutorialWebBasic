@@ -6,14 +6,9 @@
 
 
 	<security:authentication-manager>
-		<!-- <security:authentication-provider>
-			<security:user-service>
-				<security:user name="edison" authorities="admin"
-					password="edison" />
-				<security:user name="zorg" authorities="admin"
-					password="zorg" />
-			</security:user-service>
-		</security:authentication-provider>-->
+		<!-- <security:authentication-provider> <security:user-service> <security:user 
+			name="edison" authorities="admin" password="edison" /> <security:user name="zorg" 
+			authorities="admin" password="zorg" /> </security:user-service> </security:authentication-provider> -->
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="dataSource" />
@@ -30,6 +25,12 @@
 		<security:intercept-url pattern="/login"
 			access="permitAll" />
 		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/newaccount"
+			access="permitAll" />
+		<security:intercept-url pattern="/docreateaccount"
+			access="permitAll" />
+		<security:intercept-url pattern="/accountcreated"
+			access="permitAll" />
 		<security:intercept-url pattern="/offers"
 			access="permitAll" />
 		<security:intercept-url pattern="/static/**"
