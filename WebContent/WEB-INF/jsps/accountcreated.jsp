@@ -12,7 +12,10 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row">Account created !</div>
+		<div class="row"><h3>Account created !</h3></div>
+		<div class="row">
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/">Home</a>
+        </div>
 	</div>
 </body>
 </html>

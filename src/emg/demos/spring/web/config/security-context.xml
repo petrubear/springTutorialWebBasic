@@ -15,7 +15,8 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 	<security:http use-expressions="true"> <!-- match de arriba hacia abajo -->
-
+        <security:intercept-url pattern="/admin"
+            access="hasRole('admin')" />
 		<security:intercept-url pattern="/createoffer"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="/docreate"

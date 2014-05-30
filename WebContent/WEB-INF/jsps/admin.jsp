@@ -6,24 +6,15 @@
 <!-- bootstrap CSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Error</title>
+<title>Admin</title>
 </head>
 <body>
 	<div class="container">
+		<div class="row"><h3>Authorized only!</h3></div>
 		<div class="row">
-			<div class="panel panel-danger">
-				<!-- Default panel contents -->
-				<div class="panel-heading">An error has occurred.</div>
-				<div class="panel-body">
-					<p>${description}</p>
-				</div>
-			</div>
+			<a class="btn btn-primary" href="${pageContext.request.contextPath}/">Home</a>
 		</div>
-		<div class="row">
-            <a class="btn btn-primary" href="${pageContext.request.contextPath}/">Home</a>
-        </div>
 	</div>
 </body>
 </html>

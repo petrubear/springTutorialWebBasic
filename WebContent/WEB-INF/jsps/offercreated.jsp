@@ -12,9 +12,12 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h1>Offer Created.</h1>
+			<h3>Offer Created.</h3>
 			<a class="btn btn-primary"
 				href="${pageContext.request.contextPath}/offers">View Offers</a>
+		</div>
+		<div class="row">
+			<a class="btn btn-primary" href="${pageContext.request.contextPath}/">Home</a>
 		</div>
 	</div>
 </body>

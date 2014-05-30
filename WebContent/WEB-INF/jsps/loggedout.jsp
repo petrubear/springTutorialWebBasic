@@ -7,9 +7,15 @@
 <!-- bootstrap CSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Logged out</title>
+</head>
 <body>
 	<div class="container">
-		<div class="row">Good bye!</div>
+		<div class="row"><h3>Good bye!</h3></div>
+		<div class="row">
+            <a class="btn btn-primary" href="${pageContext.request.contextPath}/">Home</a>
+        </div>
 	</div>
 </body>
 </html>
