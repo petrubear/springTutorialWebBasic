@@ -1,9 +1,10 @@
 package emg.demos.spring.web.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +32,7 @@ public class LoginController {
 	public String showLogout() {
 		return "loggedout";
 	}
-	
+
 	@RequestMapping("/newaccount")
 	public String newAccount(Model model) {
 		model.addAttribute("user", new User());
@@ -48,10 +49,10 @@ public class LoginController {
 		user.setEnabled(true);
 		user.setAuthority("user");
 		System.out.println(user);
-		
+
 		if (usersService.exists(user.getUsername())) {
 			result.rejectValue("username", "DuplicateKey.user.username");
-					//,"This user already exists!");
+			// ,"This user already exists!");
 			// par1 nombre del path del imput que se valida
 			// "DuplicateKey.user.username" es un nombre que le doy al
 			// constraint
@@ -72,5 +73,12 @@ public class LoginController {
 		 */
 
 		return "accountcreated";
+	}
+
+	@RequestMapping("/admin")
+	public String showAdmin(Model model) {
+		List<User> users = usersService.getAllUsers();
+		model.addAttribute("users", users);
+		return "admin";
 	}
 }
