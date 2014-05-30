@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,11 +10,48 @@
 <!-- bootstrap CSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/static/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	function onLoad() {
+		$("#password").keyup(checkPasswordMatch);
+		$("#confirmpassword").keyup(checkPasswordMatch);
+		$("#accountform").submit(doSubmit);
+	}
+
+	function doSubmit() {
+		if (password != confirmpassword) {
+			event.preventDefault();
+		} else {
+			return;
+		}
+	}
+
+	function checkPasswordMatch() {
+		var password = $("#password").val();
+		var confirmpassword = $("#confirmpassword").val();
+
+		//if (password.length < 3 || confirmpassword.length < 3) return;
+		
+		$("#matchpass").text('<fmt:message key="PasswordMatch.password.match"></fmt:message>');
+		$("#matchpass").removeClass("text-danger");
+		$("#matchpass").addClass("text-success");
+		if (password == confirmpassword) {
+		} else {
+			$("#matchpass").text('<fmt:message key="PasswordMatch.password.dontmatch"></fmt:message>');
+			$("#matchpass").removeClass("text-success");
+			$("#matchpass").addClass("text-danger");
+		}
+	}
+
+	$(document).ready(onLoad);
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Create Account</title>
 </head>
 <body>
-	<sf:form method="post"
+
+	<sf:form id="accountform" method="post"
 		action="${pageContext.request.contextPath}/docreateaccount"
 		commandName="user">
 		<!-- command name es el nombre del model
@@ -31,12 +69,15 @@
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><sf:input path="password" name="password" type="text" /> <br />
-					<sf:errors path="password" cssClass="text-danger"></sf:errors></td>
+				<td><sf:input path="password" name="password" id="password"
+						type="password" /> <br /> <sf:errors path="password"
+						cssClass="text-danger"></sf:errors></td>
 			</tr>
 			<tr>
 				<td>Confirm Password:</td>
-				<td><input name="confirmpassword" type="text" /></td>
+				<td><input name="confirmpassword" id="confirmpassword"
+					type="password" />
+					<div id="matchpass"></div></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="left"><input class="btn btn-primary"

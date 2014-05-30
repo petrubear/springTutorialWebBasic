@@ -9,17 +9,17 @@ import emg.demos.spring.web.validation.CustomEmailValidator;
 
 public class User {
 
-	@Size(min = 4, max = 15, message = "invalid username, must be 4-15")
-	@NotBlank(message = "username is required")
-	@Pattern(regexp = "^\\w{4,}$", message = "invalid username must be alphanumeric")
+	@Size(min = 4, max = 15)//, message = "invalid username, must be 4-15")
+	@NotBlank//(message = "username is required")
+	@Pattern(regexp = "^\\w{4,}$")//, message = "invalid username must be alphanumeric")
 	private String username;
-	@Size(min = 4, max = 15, message = "invalid password, must be 4-15")
-	@NotBlank(message = "password is required")
-	@Pattern(regexp = "^\\S+$", message = "invalid password, must not have spaces")
+	@Size(min = 4, max = 15)//, message = "invalid password, must be 4-15")
+	@NotBlank//(message = "password is required")
+	@Pattern(regexp = "^\\S+$")//, message = "invalid password, must not have spaces")
 	private String password;
 	@Size(min = 10, max = 60)
 	@CustomEmailValidator
-	@NotBlank(message = "email is required")
+	@NotBlank//(message = "email is required")
 	private String email;
 	private boolean enabled = false;
 	private String authority;
@@ -78,4 +78,10 @@ public class User {
 		this.authority = authority;
 	}
 
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password
+				+ ", email=" + email + ", enabled=" + enabled + ", authority="
+				+ authority + "]";
+	}
 }

@@ -8,14 +8,14 @@ import emg.demos.spring.web.validation.CustomEmailValidator;
 public class Offer {
 
 	private int id;
-	@Size(min = 5, max = 20, message = "[name] Debe ser de tamaño 5 - 20!")
+	@Size(min = 5, max = 20)//, message = "[name] Debe ser de tamaño 5 - 20!")
 	// validaciones (hibernate validation)
 	private String name;
 	// @Pattern(regexp=".*\\@.*\\..*", message="[email] no es valido")
 	@NotNull
 	@CustomEmailValidator(min = 10)
 	private String email;
-	@Size(min = 5, max = 100, message = "[text] Debe ser de tamaño 5 - 100!")
+	@Size(min = 5, max = 100)//, message = "[text] Debe ser de tamaño 5 - 100!")
 	private String text;
 
 	public Offer() {
