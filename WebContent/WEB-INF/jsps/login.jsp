@@ -42,6 +42,14 @@
 							placeholder="Password" width="300" />
 					</div>
 				</div>
+				<div class="form-group">
+					<div class="col-md-3">
+						<label for="_spring_security_remember_me">Remember Me</label> <input
+							type="checkbox" name='_spring_security_remember_me'
+							class="form-control" id="_spring_security_remember_me"
+							checked="checked" />
+					</div>
+				</div>
 				<input name="submit" type="submit" value="Login"
 					class="btn btn-primary" />
 				<!-- <a class="btn btn-primary"
