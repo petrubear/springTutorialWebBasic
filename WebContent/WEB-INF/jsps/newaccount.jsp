@@ -16,7 +16,7 @@
 	function onLoad() {
 		$("#password").keyup(checkPasswordMatch);
 		$("#confirmpassword").keyup(checkPasswordMatch);
-		$("#accountform").submit(doSubmit);
+		//$("#accountform").submit(doSubmit);
 	}
 
 	function doSubmit() {
@@ -54,7 +54,6 @@
 <title>Create Account</title>
 </head>
 <body>
-
 	<sf:form id="accountform" method="post"
 		action="${pageContext.request.contextPath}/docreateaccount"
 		commandName="user">

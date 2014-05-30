@@ -53,12 +53,12 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2013-08-03 12:22:36
-drop table `users`;
-drop table `authorities`;
+drop table if exists `users`;
+drop table if exists `authorities`;
 
 create table if not exists `users` (
     `username` varchar(60) not NULL,
-    `password` varchar(60) not null,
+    `password` varchar(255) not null,
     `email` varchar(60) not null,
     `enabled` TINYINT(1) null default 1,
     primary key(`username`)
@@ -70,6 +70,6 @@ create table if not exists `authorities` (
 );
 truncate table `users`;
 truncate table `authorities`;
-insert into `users` (`username`, `password`, `email`) values ('edison','edison', 'edison@emg.com');
+insert into `users` (`username`, `password`, `email`) values ('edison','497b19b72b8ac35fe8ecff67f2c30036e6345e2963d3c9aff437476f94110ec568d6f9e2cce70782', 'edison@emg.com');
 insert into `authorities` values ('edison', 'ROLE_ADMIN');
 

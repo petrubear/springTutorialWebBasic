@@ -9,7 +9,9 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 //import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Component;
 public class UsersDao {
 	// private JdbcTemplate jdbc;
 	private NamedParameterJdbcTemplate jdbc;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	public void setDataSource(DataSource jdbc) {
@@ -24,9 +28,16 @@ public class UsersDao {
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
+	@Transactional
 	public boolean create(User user) {
-		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(
-				user);
+		// BeanPropertySqlParameterSource params = new
+		// BeanPropertySqlParameterSource(user);
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("username", user.getUsername());
+		params.addValue("password", passwordEncoder.encode(user.getPassword()));
+		params.addValue("email", user.getEmail());
+		params.addValue("enabled", user.isEnabled());
+		params.addValue("authority", user.getAuthority());
 
 		String sqlQuery = "insert into `users` (`username`, `password`, `email`) values (:username,:password,:email);";
 		String sqlQuery2 = "insert into `authorities` (`username`, `authority`) values (:username,:authority);";
@@ -43,6 +54,11 @@ public class UsersDao {
 	public List<User> getAllUsers() {
 		return jdbc
 				.query("SELECT * FROM users, authorities WHERE users.username = authorities.username",
-						BeanPropertyRowMapper.newInstance(User.class)); //obtiene un rowmapper con el resultado!
+						BeanPropertyRowMapper.newInstance(User.class)); // obtiene
+																		// un
+																		// rowmaper
+																		// con
+																		// el
+																		// resultado
 	}
 }
