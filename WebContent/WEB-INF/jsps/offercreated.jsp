@@ -16,6 +16,7 @@
 			<a class="btn btn-primary"
 				href="${pageContext.request.contextPath}/offers">View Offers</a>
 		</div>
+		<p />
 		<div class="row">
 			<a class="btn btn-primary" href="${pageContext.request.contextPath}/">Home</a>
 		</div>

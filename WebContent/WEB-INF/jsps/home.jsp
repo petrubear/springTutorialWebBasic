@@ -24,27 +24,27 @@
 				Offer</a>
 			<p />
 		</div>
-		<sec:authorize access="!isAuthenticated()">
-			<div class="row">
-				<a class="btn btn-primary" href="<c:url value='/login'></c:url>">Log
-					in</a>
-			</div>
-			<p />
-		</sec:authorize>
-		<sec:authorize access="hasRole('admin')">
-			<div class="row">
-				<a class="btn btn-primary"
-					href="${pageContext.request.contextPath}/admin">Admin</a>
-			</div>
-		</sec:authorize>
-		<sec:authorize access="isAuthenticated()">
-			<p />
-			<div class="row">
-				<a class="btn btn-primary"
-					href="<c:url value='/j_spring_security_logout'></c:url>">Log
-					out</a>
-			</div>
-		</sec:authorize>
+		<div class="row">
+			<a class="btn btn-primary"
+				href="${pageContext.request.contextPath}/admin">Admin</a>
+		</div>
+		<p />
+			<sec:authorize access="!isAuthenticated()">
+				<div class="row">
+					<a class="btn btn-primary" href="<c:url value='/login'></c:url>">Log
+						in</a>
+				</div>
+				<p />
+			</sec:authorize>
+
+
+			<sec:authorize access="isAuthenticated()">
+				<div class="row">
+					<a class="btn btn-primary"
+						href="<c:url value='/j_spring_security_logout'></c:url>">Log
+						out</a>
+				</div>
+			</sec:authorize>
 	</div>
 </body>
 </html>

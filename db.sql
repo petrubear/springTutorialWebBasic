@@ -71,5 +71,5 @@ create table if not exists `authorities` (
 truncate table `users`;
 truncate table `authorities`;
 insert into `users` (`username`, `password`, `email`) values ('edison','edison', 'edison@emg.com');
-insert into `authorities` values ('edison', 'admin');
+insert into `authorities` values ('edison', 'ROLE_ADMIN');
 

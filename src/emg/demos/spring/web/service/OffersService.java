@@ -3,6 +3,7 @@ package emg.demos.spring.web.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import emg.demos.spring.web.dao.Offer;
@@ -21,6 +22,7 @@ public class OffersService {
 		this.offerDao = offerDao;
 	}
 
+	@Secured({ "ROLE_USER", "ROLE_ADMIN" })
 	public void create(Offer offer) {
 		this.offerDao.create(offer);
 	}
