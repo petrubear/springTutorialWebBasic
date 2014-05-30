@@ -27,6 +27,11 @@ public class LoginController {
 		return "login";
 	}
 
+	@RequestMapping("/loggedout")
+	public String showLogout() {
+		return "loggedout";
+	}
+	
 	@RequestMapping("/newaccount")
 	public String newAccount(Model model) {
 		model.addAttribute("user", new User());

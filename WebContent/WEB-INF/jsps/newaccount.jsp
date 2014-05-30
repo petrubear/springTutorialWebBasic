@@ -32,13 +32,17 @@
 		var confirmpassword = $("#confirmpassword").val();
 
 		//if (password.length < 3 || confirmpassword.length < 3) return;
-		
-		$("#matchpass").text('<fmt:message key="PasswordMatch.password.match"></fmt:message>');
+
+		$("#matchpass")
+				.text(
+						'<fmt:message key="PasswordMatch.password.match"></fmt:message>');
 		$("#matchpass").removeClass("text-danger");
 		$("#matchpass").addClass("text-success");
 		if (password == confirmpassword) {
 		} else {
-			$("#matchpass").text('<fmt:message key="PasswordMatch.password.dontmatch"></fmt:message>');
+			$("#matchpass")
+					.text(
+							'<fmt:message key="PasswordMatch.password.dontmatch"></fmt:message>');
 			$("#matchpass").removeClass("text-success");
 			$("#matchpass").addClass("text-danger");
 		}
@@ -56,35 +60,41 @@
 		commandName="user">
 		<!-- command name es el nombre del model
         que recibe el metodo createOffer() en offerControler -->
-		<table class="table table table-striped table-bordered">
-			<tr>
-				<td>Username:</td>
-				<td><sf:input path="username" name="username" type="text" /> <br />
-					<sf:errors path="username" cssClass="text-danger"></sf:errors></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td><sf:input path="email" name="email" type="text" /> <br />
-					<sf:errors path="email" cssClass="text-danger"></sf:errors></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><sf:input path="password" name="password" id="password"
-						type="password" /> <br /> <sf:errors path="password"
-						cssClass="text-danger"></sf:errors></td>
-			</tr>
-			<tr>
-				<td>Confirm Password:</td>
-				<td><input name="confirmpassword" id="confirmpassword"
-					type="password" />
-					<div id="matchpass"></div></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="left"><input class="btn btn-primary"
-					value="Create Account" type="submit" /> <a class="btn btn-primary"
-					href="${pageContext.request.contextPath}/">Home</a></td>
-			</tr>
-		</table>
+
+		<div class="container">
+			<div class="row">
+				<table class="table table table-striped table-bordered">
+					<tr>
+						<td>Username:</td>
+						<td><sf:input path="username" name="username" type="text" />
+							<br /> <sf:errors path="username" cssClass="text-danger"></sf:errors></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><sf:input path="email" name="email" type="text" /> <br />
+							<sf:errors path="email" cssClass="text-danger"></sf:errors></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><sf:input path="password" name="password" id="password"
+								type="password" /> <br /> <sf:errors path="password"
+								cssClass="text-danger"></sf:errors></td>
+					</tr>
+					<tr>
+						<td>Confirm Password:</td>
+						<td><input name="confirmpassword" id="confirmpassword"
+							type="password" />
+							<div id="matchpass"></div></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="left"><input class="btn btn-primary"
+							value="Create Account" type="submit" /> <a
+							class="btn btn-primary"
+							href="${pageContext.request.contextPath}/">Home</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</sf:form>
 </body>
 </html>

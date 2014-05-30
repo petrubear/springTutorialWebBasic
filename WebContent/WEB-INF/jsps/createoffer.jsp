@@ -18,28 +18,33 @@
 		commandName="offer">
 		<!-- command name es el nombre del model
 		que recibe el metodo createOffer() en offerControler -->
-		<table class="table table table-striped table-bordered">
-			<tr>
-				<td>Name:</td>
-				<td><sf:input path="name" name="name" type="text" /> <br /> <sf:errors
-						path="name" cssClass="text-danger"></sf:errors></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td><sf:input path="email" name="email" type="text" /> <br />
-					<sf:errors path="email" cssClass="text-danger"></sf:errors></td>
-			</tr>
-			<tr>
-				<td>Offer:</td>
-				<td><sf:textarea path="text" name="text" rows="3" cols="40"></sf:textarea>
-					<br /> <sf:errors path="text" cssClass="text-danger"></sf:errors></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="left"><input class="btn btn-primary"
-					value="Create" type="submit" /> <a class="btn btn-primary"
-					href="${pageContext.request.contextPath}/">Home</a></td>
-			</tr>
-		</table>
+
+		<div class="container">
+			<div class="row">
+				<table class="table table table-striped table-bordered">
+					<tr>
+						<td>Name:</td>
+						<td><sf:input path="name" name="name" type="text" /> <br />
+							<sf:errors path="name" cssClass="text-danger"></sf:errors></td>
+					</tr>
+					<tr>
+						<td>Email:</td>
+						<td><sf:input path="email" name="email" type="text" /> <br />
+							<sf:errors path="email" cssClass="text-danger"></sf:errors></td>
+					</tr>
+					<tr>
+						<td>Offer:</td>
+						<td><sf:textarea path="text" name="text" rows="3" cols="40"></sf:textarea>
+							<br /> <sf:errors path="text" cssClass="text-danger"></sf:errors></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="left"><input class="btn btn-primary"
+							value="Create" type="submit" /> <a class="btn btn-primary"
+							href="${pageContext.request.contextPath}/">Home</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</sf:form>
 </body>
 </html>

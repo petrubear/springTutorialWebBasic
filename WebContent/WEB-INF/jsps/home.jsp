@@ -12,13 +12,20 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>Offers</h1>
-	<p>
-		<a class="btn btn-primary"
-			href="${pageContext.request.contextPath}/offers">View Offers</a> <a
-			class="btn btn-primary"
-			href="${pageContext.request.contextPath}/createoffer">Create
-			Offer</a>
-	</p>
+	<div class="container">
+		<h1>Offers</h1>
+		<div class="row">
+			<a class="btn btn-primary"
+				href="${pageContext.request.contextPath}/offers">View Offers</a> <a
+				class="btn btn-primary"
+				href="${pageContext.request.contextPath}/createoffer">Create
+				Offer</a>
+		</div>
+		<p />
+		<div class="row">
+			<a class="btn btn-primary"
+				href="<c:url value='/j_spring_security_logout'></c:url>">Log out</a>
+		</div>
+	</div>
 </body>
 </html>

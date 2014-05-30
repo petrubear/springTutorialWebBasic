@@ -13,7 +13,9 @@
 <title>Offers Home</title>
 </head>
 <body>
-	<!-- 
+	<div class="container">
+		<div class="row">
+			<!-- 
     <table class="table table-striped table-bordered">
         <tr>
             <th colspan="2">Recibiendo Valores del Controller</th>
@@ -63,27 +65,29 @@
     </table>
     <p />
      -->
-	<table class="table table-striped table-bordered">
-		<tr>
-			<th colspan="4">MySQL Query Dao - Service</th>
-		</tr>
-		<tr>
-			<th class="info">ID:</th>
-			<th>Name:</th>
-			<th>Email:</th>
-			<th>Text:</th>
-		</tr>
+			<table class="table table-striped table-bordered">
+				<tr>
+					<th colspan="4">MySQL Query Dao - Service</th>
+				</tr>
+				<tr>
+					<th class="info">ID:</th>
+					<th>Name:</th>
+					<th>Email:</th>
+					<th>Text:</th>
+				</tr>
 
-		<c:forEach var="row" items="${offers}">
-			<tr>
-				<td class="info">${row.id}</td>
-				<td>${row.name}</td>
-				<td>${row.email}</td>
-				<td>${row.text}</td>
-			</tr>
-		</c:forEach>
-	</table>
-	
-	<a class="btn btn-primary" href="${pageContext.request.contextPath}/">Home</a>
+				<c:forEach var="row" items="${offers}">
+					<tr>
+						<td class="info">${row.id}</td>
+						<td>${row.name}</td>
+						<td>${row.email}</td>
+						<td>${row.text}</td>
+					</tr>
+				</c:forEach>
+			</table>
+
+			<a class="btn btn-primary" href="${pageContext.request.contextPath}/">Home</a>
+		</div>
+	</div>
 </body>
 </html>
