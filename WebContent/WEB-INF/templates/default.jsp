@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>default</title>
+<title><tiles:insertAttribute name="title"></tiles:insertAttribute></title>
 </head>
 <body>Hello Apache Tiles
 </body>
