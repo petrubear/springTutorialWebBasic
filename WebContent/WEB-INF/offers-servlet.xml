@@ -16,10 +16,10 @@
 		</property>
 	</bean>
 	<bean id="tilesViewResolver"
-		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
 	</bean>
 	<bean id="tilesConfigurer"
-		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
 			<list>
 				<value>/WEB-INF/layout/default.xml</value>
