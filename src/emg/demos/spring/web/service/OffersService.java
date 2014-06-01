@@ -50,4 +50,8 @@ public class OffersService {
 			offerDao.create(offer);
 		}
 	}
+
+	public void delete(int id) {
+		offerDao.delete(id);
+	}
 }

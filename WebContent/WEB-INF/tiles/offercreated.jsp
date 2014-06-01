@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <div class="row">
-	<h3>Offer Created.</h3>
-	<a class="btn btn-primary"
-		href="${pageContext.request.contextPath}/offers">View Offers</a>
+	<h3>Offer Updated or Deleted</h3>
 </div>
 <p />
