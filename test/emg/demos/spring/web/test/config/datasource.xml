@@ -27,6 +27,12 @@
 			<property name="hibernateProperties">
 				<props>
 					<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+					<prop key="javax.persistence.validation.group.pre-persist">emg.demos.spring.web.dao.IPersistenceValidationGroup
+					</prop>
+					<prop key="javax.persistence.validation.group.pre-update">emg.demos.spring.web.dao.IPersistenceValidationGroup
+					</prop>
+					<prop key="javax.persistence.validation.group.pre-remove">emg.demos.spring.web.dao.IPersistenceValidationGroup
+					</prop>
 				</props>
 			</property>
 			<property name="packagesToScan">

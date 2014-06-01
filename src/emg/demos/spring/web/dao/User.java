@@ -15,33 +15,37 @@ import emg.demos.spring.web.validation.CustomEmailValidator;
 @Table(name = "users")
 public class User {
 
-	@Size(min = 4, max = 15)
+	@Size(min = 4, max = 15, groups = { IPersistenceValidationGroup.class,
+			IFormValidationGroup.class })
 	// , message = "invalid username, must be 4-15")
-	@NotBlank
-	// (message = "username is required")
-	@Pattern(regexp = "^\\w{4,}$")
-	// , message = "invalid username must be alphanumeric")
+	@NotBlank(groups = { IPersistenceValidationGroup.class,
+			IFormValidationGroup.class })
+	// validation groups!! para separar la validacion de pagina de la de
+	// hibernate
+	@Pattern(regexp = "^\\w{4,}$", groups = {
+			IPersistenceValidationGroup.class, IFormValidationGroup.class })
 	@Id
 	// primary key
 	@Column(name = "username")
 	// column in table
 	private String username;
-	@Size(min = 4, max = 15)
-	// , message = "invalid password, must be 4-15")
-	@NotBlank
-	// (message = "password is required")
-	@Pattern(regexp = "^\\S+$")
-	// , message = "invalid password, must not have spaces")
+	@Size(min = 4, max = 15, groups = { IFormValidationGroup.class })
+	@NotBlank(groups = { IPersistenceValidationGroup.class,
+			IFormValidationGroup.class })
+	@Pattern(regexp = "^\\S+$", groups = { IFormValidationGroup.class })
 	private String password;
-	@Size(min = 10, max = 60)
+	@Size(min = 10, max = 60, groups = { IPersistenceValidationGroup.class,
+			IFormValidationGroup.class })
 	@CustomEmailValidator
-	@NotBlank
-	// (message = "email is required")
+	@NotBlank(groups = { IPersistenceValidationGroup.class,
+			IFormValidationGroup.class })
 	private String email;
 	private boolean enabled = false;
 	private String authority;
-	@Size(min = 3, max = 60)
-	@NotBlank
+	@Size(min = 3, max = 60, groups = { IPersistenceValidationGroup.class,
+			IFormValidationGroup.class })
+	@NotBlank(groups = { IPersistenceValidationGroup.class,
+			IFormValidationGroup.class })
 	private String name;
 
 	public User() {

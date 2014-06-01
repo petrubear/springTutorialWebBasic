@@ -2,15 +2,15 @@ package emg.demos.spring.web.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import emg.demos.spring.web.dao.IFormValidationGroup;
 import emg.demos.spring.web.dao.User;
 import emg.demos.spring.web.service.UsersService;
 
@@ -40,7 +40,9 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/docreateaccount", method = RequestMethod.POST)
-	public String doCreateAccount(Model model, @Valid User user,
+	// public String doCreateAccount(Model model, @Valid User user,
+	public String doCreateAccount(
+			@Validated(IFormValidationGroup.class) User user,
 			BindingResult result) {
 		if (result.hasErrors()) {
 			return "newaccount"; // regresa a creacion si hay un error

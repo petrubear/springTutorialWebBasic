@@ -20,6 +20,26 @@
 			class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 			<property name="dataSource" ref="dataSource"></property>
 		</bean>
+		<bean id="sessionFactory"
+			class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+			<property name="dataSource" ref="dataSource"></property>
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+					<prop key="javax.persistence.validation.group.pre-persist">emg.demos.spring.web.dao.IPersistenceValidationGroup
+					</prop>
+					<prop key="javax.persistence.validation.group.pre-update">emg.demos.spring.web.dao.IPersistenceValidationGroup
+					</prop>
+					<prop key="javax.persistence.validation.group.pre-remove">emg.demos.spring.web.dao.IPersistenceValidationGroup
+					</prop>
+				</props>
+			</property>
+			<property name="packagesToScan">
+				<list>
+					<value>emg.demos.spring.web.dao</value>
+				</list>
+			</property>
+		</bean>
 		<tx:annotation-driven />
 	</beans>
 </beans>

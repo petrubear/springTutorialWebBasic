@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -32,13 +33,16 @@ public class UserDaoTests {
 	@Autowired
 	private DataSource dataSource;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@Before
 	public void init() {
 		JdbcTemplate jdbc = new JdbcTemplate(dataSource);
 
 		jdbc.execute("delete from offers");
 		jdbc.execute("delete from users");
-		//jdbc.execute("delete from authorities");
+		// jdbc.execute("delete from authorities");
 	}
 
 	@Test
@@ -47,7 +51,10 @@ public class UserDaoTests {
 		// username, password, email, enabled, authority, name
 		User user = new User("edison", "edison", "edison@emg.com", true,
 				"ROLE_ADMINISTRATOR", "Edison");
-		assertTrue("Should be true for user creation", usersDao.create(user));
+		// assertTrue("Should be true for user creation",
+		// usersDao.create(user));
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		usersDao.create(user);
 
 		List<User> users = usersDao.getAllUsers();
 		assertEquals("Total users should be 1", 1, users.size());

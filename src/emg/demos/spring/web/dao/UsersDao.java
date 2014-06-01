@@ -37,6 +37,13 @@ public class UsersDao {
 	}
 	
 	@Transactional
+	public void create(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		session().save(user);
+	}
+	//using jdbc 
+	/*
+	@Transactional
 	public boolean create(User user) {
 		// BeanPropertySqlParameterSource params = new
 		// BeanPropertySqlParameterSource(user);
@@ -54,7 +61,7 @@ public class UsersDao {
 		// jdbc.update(sqlQuery, params);
 		return jdbc.update(sqlQuery, params) == 1;
 	}
-
+*/
 	public boolean exists(String username) {
 		return jdbc.queryForObject(
 				"select count(*) from `users` where `username` = :username;",
