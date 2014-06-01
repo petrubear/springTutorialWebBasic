@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import emg.demos.spring.web.dao.IFormValidationGroup;
 import emg.demos.spring.web.dao.Offer;
 import emg.demos.spring.web.service.OffersService;
 
@@ -60,7 +62,8 @@ public class OffersController {
 	}
 
 	@RequestMapping(value = "/docreate", method = RequestMethod.POST)
-	public String doCreate(Model model, @Valid Offer offer,
+	// public String doCreate(Model model, @Valid Offer offer,
+	public String doCreate(@Validated(IFormValidationGroup.class) Offer offer,
 			BindingResult result, Principal principal,
 			@RequestParam(value = "delete", required = false) String delete) {
 		logger.debug(offer);
