@@ -31,4 +31,23 @@ public class OffersService {
 		this.offerDao.getOffer(9000000);
 	}
 
+	public boolean hasOffer(String name) {
+		if (name == null)
+			return false;
+		return offerDao.getOffer(name).size() > 0;
+	}
+
+	public List<Offer> getOffers(String username) {
+		if (username == null)
+			return null;
+		return offerDao.getOffer(username);
+	}
+
+	public void saveOrUpdate(Offer offer) {
+		if (offer.getId() != 0) {
+			offerDao.update(offer);
+		} else {
+			offerDao.create(offer);
+		}
+	}
 }

@@ -13,6 +13,7 @@ public class Offer {
 
 	public Offer() {
 		super();
+		this.user = new User();
 	}
 
 	public Offer(User user, String text) {

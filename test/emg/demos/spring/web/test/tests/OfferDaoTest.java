@@ -69,4 +69,12 @@ public class OfferDaoTest {
 		offer.setText("Updated offer text.");
 		assertTrue("Offer update should return true", offersDao.update(offer));
 	}
+
+	@Test
+	public void testGetOfferByUsername() {
+		List<Offer> offers = offersDao.getOffer(user.getUsername());
+
+		assertEquals("Must be a user offer", user.getUsername(), offers.get(0)
+				.getUser().getUsername());
+	}
 }

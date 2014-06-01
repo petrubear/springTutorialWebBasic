@@ -1,9 +1,11 @@
 package emg.demos.spring.web.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,11 +29,12 @@ public class OffersController {
 	 */
 	/* opcion 2 usando Spring Model */
 
+	private static Logger logger = Logger.getLogger(OffersController.class);
 	private OffersService offersService;
 
 	@RequestMapping("/offers")
 	public String showOffers(Model model) {
-		//offersService.throwExceptionTest();
+		// offersService.throwExceptionTest();
 		List<Offer> offers = offersService.getCurrent();
 
 		model.addAttribute("name", "<b>Satou</b>");
@@ -40,19 +43,33 @@ public class OffersController {
 	}
 
 	@RequestMapping("/createoffer")
-	public String createOffer(Model model) {
-		model.addAttribute("offer", new Offer());
+	public String createOffer(Model model, Principal principal) {
+		Offer offer = new Offer();
+		if (principal != null) {
+			String username = principal.getName();
+			logger.debug("Principal: " + username);
+			List<Offer> offers = offersService.getOffers(username);
+			logger.debug("Principal Offers: " + offers.size());
+			if (offers.size() > 0) {
+				offer = offers.get(0);
+			}
+		}
+		model.addAttribute("offer", offer);
 		return "createoffer";
 	}
 
 	@RequestMapping(value = "/docreate", method = RequestMethod.POST)
-	public String doCreate(Model model, @Valid Offer offer, BindingResult result) {
-		System.out.println(offer);
+	public String doCreate(Model model, @Valid Offer offer,
+			BindingResult result, Principal principal) {
+		logger.debug(offer);
 		if (result.hasErrors()) {
 			return "createoffer"; // regresa a creacion si hay un error
 		}
 
-		offersService.create(offer);
+		String username = principal.getName();
+		offer.getUser().setUsername(username);
+		// offersService.create(offer);
+		offersService.saveOrUpdate(offer);
 		return "offercreated";
 	}
 
@@ -62,9 +79,9 @@ public class OffersController {
 	}
 
 	// Exceptions
-	/*@ExceptionHandler(DataAccessException.class)
-	public String handleDatabaseException(DataAccessException exception) {
-		return "error";
-	}
-	*/
+	/*
+	 * @ExceptionHandler(DataAccessException.class) public String
+	 * handleDatabaseException(DataAccessException exception) { return "error";
+	 * }
+	 */
 }

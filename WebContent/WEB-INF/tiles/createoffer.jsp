@@ -9,6 +9,7 @@
 	<!-- command name es el nombre del model
 		que recibe el metodo createOffer() en offerControler -->
 
+	<sf:input name="id" type="hidden" path="id" />
 	<div class="container">
 		<div class="row">
 			<table class="table table table-striped table-bordered">
@@ -19,7 +20,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="left"><input class="btn btn-primary"
-						value="Create" type="submit" /></td>
+						value="Save Offer" type="submit" /></td>
 				</tr>
 			</table>
 		</div>
