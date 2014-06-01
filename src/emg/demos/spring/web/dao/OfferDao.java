@@ -32,10 +32,8 @@ public class OfferDao {
 		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(
 				offer);
 
-		String sqlQuery = "insert into offers (name, text, email) values (:name, :text, :email)";
-		if (offer.getId() != 0) {
-			sqlQuery = "insert into offers (id, name, text, email) values (:id, :name, :text, :email)";
-		}
+		String sqlQuery = "insert into offers (username, text) values (:username, :text)";
+
 		return jdbc.update(sqlQuery, params) == 1;
 	}
 
@@ -45,14 +43,14 @@ public class OfferDao {
 	public int[] create(List<Offer> offers) {
 		SqlParameterSource[] params = SqlParameterSourceUtils
 				.createBatch(offers.toArray());
-		String sqlQuery = "insert into offers (id, name, text, email) values (:id, :name, :text, :email)";
+		String sqlQuery = "insert into offers (username, text) values (:username, :text)";
 		return jdbc.batchUpdate(sqlQuery, params);
 	}
 
 	public boolean update(Offer offer) {
 		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(
 				offer);
-		String sqlQuery = "update offers set name = :name, email = :email, text = :text where id = :id";
+		String sqlQuery = "update offers set text = :text where id = :id";
 
 		return jdbc.update(sqlQuery, params) == 1;
 	}
@@ -66,35 +64,69 @@ public class OfferDao {
 	public Offer getOffer(int id) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("id", id);
-		// queryForObject devuelve 1 valor
-		// parametros se definen con : como :name
-		return jdbc.queryForObject("select * from offers where id = :id",
+		return jdbc.queryForObject("select * from offers, users where offers.username=users.username and id = :id",
 				params, new RowMapper<Offer>() {
 					public Offer mapRow(ResultSet rs, int rowNum)
 							throws SQLException {
+						User user = new User();
+						user.setAuthority(rs.getString("authority"));
+						user.setEmail(rs.getString("email"));
+						user.setEnabled(true);
+						user.setName(rs.getString("name"));
+						user.setUsername(rs.getString("username"));
+
 						Offer offer = new Offer();
 						offer.setId(rs.getInt("id"));
-						offer.setName(rs.getString("name"));
-						offer.setEmail(rs.getString("email"));
 						offer.setText(rs.getString("text"));
+						offer.setUser(user);
 
 						return offer;
 					}
 				});
+
+		// queryForObject devuelve 1 valor
+		// parametros se definen con : como :name
+		/*
+		 * return jdbc.queryForObject("select * from offers where id = :id",
+		 * params, new RowMapper<Offer>() { public Offer mapRow(ResultSet rs,
+		 * int rowNum) throws SQLException { Offer offer = new Offer();
+		 * offer.setId(rs.getInt("id")); offer.setName(rs.getString("name"));
+		 * offer.setEmail(rs.getString("email"));
+		 * offer.setText(rs.getString("text"));
+		 * 
+		 * return offer; } });
+		 */
 	}
 
 	public List<Offer> getOffers() {
-		return jdbc.query("select * from offers", new RowMapper<Offer>() {
-
+		String sqlString = "select * from offers, users where offers.username=users.username and users.enabled=true";
+		return jdbc.query(sqlString, new RowMapper<Offer>() {
 			public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				User user = new User();
+				user.setAuthority(rs.getString("authority"));
+				user.setEmail(rs.getString("email"));
+				user.setEnabled(true);
+				user.setName(rs.getString("name"));
+				user.setUsername(rs.getString("username"));
+
 				Offer offer = new Offer();
 				offer.setId(rs.getInt("id"));
-				offer.setName(rs.getString("name"));
-				offer.setEmail(rs.getString("email"));
 				offer.setText(rs.getString("text"));
+				offer.setUser(user);
 
 				return offer;
 			}
 		});
+		/*
+		 * return jdbc.query("select * from offers", new RowMapper<Offer>() {
+		 * 
+		 * public Offer mapRow(ResultSet rs, int rowNum) throws SQLException {
+		 * Offer offer = new Offer(); offer.setId(rs.getInt("id"));
+		 * offer.setName(rs.getString("name"));
+		 * offer.setEmail(rs.getString("email"));
+		 * offer.setText(rs.getString("text"));
+		 * 
+		 * return offer; } });
+		 */
 	}
 }

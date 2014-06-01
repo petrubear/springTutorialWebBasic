@@ -15,6 +15,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import emg.demos.spring.web.dao.Offer;
+import emg.demos.spring.web.dao.OfferDao;
 import emg.demos.spring.web.dao.User;
 import emg.demos.spring.web.dao.UsersDao;
 
@@ -24,7 +26,10 @@ import emg.demos.spring.web.dao.UsersDao;
 		"classpath:emg/demos/spring/web/config/dao-context.xml",
 		"classpath:emg/demos/spring/web/config/security-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UserDaoTests {
+public class OfferDaoTest {
+
+	@Autowired
+	private OfferDao offersDao;
 
 	@Autowired
 	private UsersDao usersDao;
@@ -32,26 +37,36 @@ public class UserDaoTests {
 	@Autowired
 	private DataSource dataSource;
 
+	private User user;
+	private Offer offer;
+
 	@Before
 	public void init() {
 		JdbcTemplate jdbc = new JdbcTemplate(dataSource);
 
+		jdbc.execute("delete from offers");
 		jdbc.execute("delete from users");
-		//jdbc.execute("delete from authorities");
+		user = new User("edison", "edison", "edison@emg.com", true,
+				"ROLE_ADMINISTRATOR", "Edison");
+		offer = new Offer(user, "This is a test offer.");
+
+		assertTrue("User creation should return true", usersDao.create(user));
+		assertTrue("Offer creation should return true", offersDao.create(offer));
 	}
 
 	@Test
-	public void testCreateUser() {
+	public void testGetAllOffers() {
+		List<Offer> offers = offersDao.getOffers();
+		assertEquals("Should be one offer in database.", 1, offers.size());
+		// assertEquals("Retrieved offer should match created offer.", offer,
+		// offers.get(0));
+	}
 
-		// username, password, email, enabled, authority, name
-		User user = new User("edison", "edison", "edison@emg.com", true,
-				"ROLE_ADMINISTRATOR", "Edison");
-		assertTrue("Should be true for user creation", usersDao.create(user));
-
-		List<User> users = usersDao.getAllUsers();
-		assertEquals("Total users should be 1", 1, users.size());
-
-		assertEquals("User edison should exists", true,
-				usersDao.exists(user.getUsername()));
+	@Test
+	public void testUpdateOffer() {
+		List<Offer> offers = offersDao.getOffers();
+		offer.setId(offers.get(0).getId());
+		offer.setText("Updated offer text.");
+		assertTrue("Offer update should return true", offersDao.update(offer));
 	}
 }

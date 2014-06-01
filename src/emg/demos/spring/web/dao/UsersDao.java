@@ -6,7 +6,6 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,11 +37,13 @@ public class UsersDao {
 		params.addValue("email", user.getEmail());
 		params.addValue("enabled", user.isEnabled());
 		params.addValue("authority", user.getAuthority());
+		params.addValue("name", user.getName());
 
-		String sqlQuery = "insert into `users` (`username`, `password`, `email`) values (:username,:password,:email);";
-		String sqlQuery2 = "insert into `authorities` (`username`, `authority`) values (:username,:authority);";
-		jdbc.update(sqlQuery, params);
-		return jdbc.update(sqlQuery2, params) == 1;
+		String sqlQuery = "insert into `users` (`username`, `password`, `email`, `name`, `authority`) values (:username,:password,:email,:name,:authority);";
+		// String sqlQuery2 =
+		// "insert into `authorities` (`username`, `authority`) values (:username,:authority);";
+		// jdbc.update(sqlQuery, params);
+		return jdbc.update(sqlQuery, params) == 1;
 	}
 
 	public boolean exists(String username) {
@@ -52,13 +53,11 @@ public class UsersDao {
 	}
 
 	public List<User> getAllUsers() {
-		return jdbc
-				.query("SELECT * FROM users, authorities WHERE users.username = authorities.username",
-						BeanPropertyRowMapper.newInstance(User.class)); // obtiene
-																		// un
-																		// rowmaper
-																		// con
-																		// el
-																		// resultado
+		String sqlQuery = "SELECT * FROM users";
+		return jdbc.query(sqlQuery,
+				BeanPropertyRowMapper.newInstance(User.class));
+		// return
+		// jdbc.query("SELECT * FROM users, authorities WHERE users.username = authorities.username",BeanPropertyRowMapper.newInstance(User.class));
+		// obtiene un rowmapper como resultado del query
 	}
 }
