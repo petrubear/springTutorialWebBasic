@@ -19,8 +19,8 @@
 		<c:forEach var="row" items="${offers}">
 			<tr>
 				<td class="info">${row.id}</td>
-				<td>${row.name}</td>
-				<td>${row.email}</td>
+				<td>${row.user.name}</td>
+				<td>${row.user.email}</td>
 				<td>${row.text}</td>
 			</tr>
 		</c:forEach>

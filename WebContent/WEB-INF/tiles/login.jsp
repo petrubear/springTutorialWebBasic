@@ -10,13 +10,13 @@
 			<!-- Default panel contents -->
 			<div class="panel-heading">Error</div>
 			<div class="panel-body">
-				<p>Invalid Username & Password</p>
+				<p>Invalid Username or Password</p>
 			</div>
 		</div>
 	</c:if>
 	<form name='f'
 		action='${pageContext.request.contextPath}/j_spring_security_check'
-		method='POST' class="form form-horizontal" role="form">
+		method='POST' class="form form-horizontal" >
 
 		<div class="form-group">
 			<div class="col-md-3">

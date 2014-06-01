@@ -60,6 +60,11 @@
 						<br /> <sf:errors path="username" cssClass="text-danger"></sf:errors></td>
 				</tr>
 				<tr>
+					<td>Name:</td>
+					<td><sf:input path="name" name="name" type="text" />
+						<br /> <sf:errors path="name" cssClass="text-danger"></sf:errors></td>
+				</tr>
+				<tr>
 					<td>Email:</td>
 					<td><sf:input path="email" name="email" type="text" /> <br />
 						<sf:errors path="email" cssClass="text-danger"></sf:errors></td>

@@ -30,6 +30,8 @@ public class User {
 	private String email;
 	private boolean enabled = false;
 	private String authority;
+	@Size(min = 3, max = 60)
+	@NotBlank
 	private String name;
 
 	public User() {
