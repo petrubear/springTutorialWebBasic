@@ -4,8 +4,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.jdbc.core.JdbcTemplate;
 
 @Component("usersDao")
+@Transactional
 public class UsersDao {
 	// private JdbcTemplate jdbc;
 	private NamedParameterJdbcTemplate jdbc;
@@ -22,11 +24,18 @@ public class UsersDao {
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@Autowired
 	public void setDataSource(DataSource jdbc) {
 		// this.jdbc = new JdbcTemplate(jdbc);
 		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
 	}
 
+	public Session session(){
+		return sessionFactory.getCurrentSession();
+	}
+	
 	@Transactional
 	public boolean create(User user) {
 		// BeanPropertySqlParameterSource params = new
@@ -52,10 +61,17 @@ public class UsersDao {
 				new MapSqlParameterSource("username", username), Integer.class) > 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers() {
+		//using hibernate
+		return session().createQuery("from User").list();
+		
+		//using apache commons jdbc
+		/*
 		String sqlQuery = "SELECT * FROM users";
 		return jdbc.query(sqlQuery,
 				BeanPropertyRowMapper.newInstance(User.class));
+				*/
 		// return
 		// jdbc.query("SELECT * FROM users, authorities WHERE users.username = authorities.username",BeanPropertyRowMapper.newInstance(User.class));
 		// obtiene un rowmapper como resultado del query

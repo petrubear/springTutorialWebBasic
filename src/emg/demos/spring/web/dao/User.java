@@ -1,5 +1,9 @@
 package emg.demos.spring.web.dao;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -7,6 +11,8 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import emg.demos.spring.web.validation.CustomEmailValidator;
 
+@Entity
+@Table(name = "users")
 public class User {
 
 	@Size(min = 4, max = 15)
@@ -15,6 +21,10 @@ public class User {
 	// (message = "username is required")
 	@Pattern(regexp = "^\\w{4,}$")
 	// , message = "invalid username must be alphanumeric")
+	@Id
+	// primary key
+	@Column(name = "username")
+	// column in table
 	private String username;
 	@Size(min = 4, max = 15)
 	// , message = "invalid password, must be 4-15")
