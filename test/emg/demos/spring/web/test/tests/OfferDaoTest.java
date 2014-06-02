@@ -50,9 +50,11 @@ public class OfferDaoTest {
 				"ROLE_ADMINISTRATOR", "Edison");
 		offer = new Offer(user, "This is a test offer.");
 
-		//assertTrue("User creation should return true", usersDao.create(user));
+		// assertTrue("User creation should return true",
+		// usersDao.create(user));
 		usersDao.create(user);
-		//assertTrue("Offer creation should return true", offersDao.create(offer));
+		// assertTrue("Offer creation should return true",
+		// offersDao.create(offer));
 		offersDao.create(offer);
 	}
 
@@ -69,7 +71,12 @@ public class OfferDaoTest {
 		List<Offer> offers = offersDao.getOffers();
 		offer.setId(offers.get(0).getId());
 		offer.setText("Updated offer text.");
-		assertTrue("Offer update should return true", offersDao.update(offer));
+		// assertTrue("Offer update should return true",
+		// offersDao.update(offer));
+		offersDao.update(offer);
+		offersDao.delete(offer.getId());
+		offers = offersDao.getOffers();
+		assertEquals("Must be 0",  offers.size(), 0);
 	}
 
 	@Test

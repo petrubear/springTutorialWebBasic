@@ -5,15 +5,13 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,19 +22,21 @@ import org.springframework.transaction.annotation.Transactional;
 // requerido por hibernate
 public class OfferDao {
 	// private JdbcTemplate jdbc;
-	private NamedParameterJdbcTemplate jdbc;
-
-	@Autowired
-	public void setDataSource(DataSource jdbc) {
-		// this.jdbc = new JdbcTemplate(jdbc);
-		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
-	}
-
+	// private NamedParameterJdbcTemplate jdbc;
+	/*
+	 * @Autowired public void setDataSource(DataSource jdbc) { // this.jdbc =
+	 * new JdbcTemplate(jdbc); this.jdbc = new NamedParameterJdbcTemplate(jdbc);
+	 * }
+	 */
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	public Session session() {
 		return sessionFactory.getCurrentSession();
+	}
+
+	public void saveOrUpdate(Offer offer) {
+		session().saveOrUpdate(offer);
 	}
 
 	/*
@@ -54,33 +54,51 @@ public class OfferDao {
 
 	// Ejecuta el metodo como una transaccion
 	// Se insertan todos los valores de la lista o ninguno
-	@Transactional
-	public int[] create(List<Offer> offers) {
-		SqlParameterSource[] params = SqlParameterSourceUtils
-				.createBatch(offers.toArray());
-		String sqlQuery = "insert into offers (username, text) values (:username, :text)";
-		return jdbc.batchUpdate(sqlQuery, params);
-	}
+	/*
+	 * @Transactional public int[] create(List<Offer> offers) {
+	 * SqlParameterSource[] params = SqlParameterSourceUtils
+	 * .createBatch(offers.toArray()); String sqlQuery =
+	 * "insert into offers (username, text) values (:username, :text)"; return
+	 * jdbc.batchUpdate(sqlQuery, params); }
+	 */
 
-	public boolean update(Offer offer) {
-		BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(
-				offer);
-		String sqlQuery = "update offers set text = :text where id = :id";
-
-		return jdbc.update(sqlQuery, params) == 1;
+	// public boolean update(Offer offer) {
+	public void update(Offer offer) {
+		session().update(offer);
+		/*
+		 * BeanPropertySqlParameterSource params = new
+		 * BeanPropertySqlParameterSource( offer); String sqlQuery =
+		 * "update offers set text = :text where id = :id";
+		 * 
+		 * return jdbc.update(sqlQuery, params) == 1;
+		 */
 	}
 
 	public boolean delete(int id) {
-		MapSqlParameterSource params = new MapSqlParameterSource("id", id);
-
-		return jdbc.update("delete from offers where id = :id", params) == 1;
+		Query query = session().createQuery("delete from Offer where id = :id");
+		query.setLong("id", id);
+		return query.executeUpdate() == 1;
 	}
 
+	/*
+	 * public boolean delete(int id) { MapSqlParameterSource params = new
+	 * MapSqlParameterSource("id", id);
+	 * 
+	 * return jdbc.update("delete from offers where id = :id", params) == 1; }
+	 */
+
 	public List<Offer> getOffer(String username) {
-		String sqlString = "select * from offers, users where offers.username=users.username and offers.username = :username";
-		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("username", username);
-		return jdbc.query(sqlString, params, new OfferRowMapper());
+		Criteria criteria = session().createCriteria(Offer.class);
+		criteria.createAlias("user", "u");// alias para la otra tabla (users)
+		criteria.add(Restrictions.eq("u.enabled", true));
+		criteria.add(Restrictions.eq("u.username", username));
+
+		return criteria.list();
+		// String sqlString =
+		// "select * from offers, users where offers.username=users.username and offers.username = :username";
+		// MapSqlParameterSource params = new MapSqlParameterSource();
+		// params.addValue("username", username);
+		// return jdbc.query(sqlString, params, new OfferRowMapper());
 
 		// queryForObject devuelve 1 valor
 		// parametros se definen con : como :name
@@ -97,13 +115,19 @@ public class OfferDao {
 	}
 
 	public Offer getOffer(int id) {
-		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("id", id);
-		return jdbc
-				.queryForObject(
-						"select * from offers, users where offers.username=users.username and id = :id",
-						params, new OfferRowMapper());
+		Criteria criteria = session().createCriteria(Offer.class);
+		criteria.createAlias("user", "u");// alias para la otra tabla (users)
+		criteria.add(Restrictions.eq("u.enabled", true));
+		criteria.add(Restrictions.idEq(id));
 
+		return (Offer) criteria.uniqueResult();
+
+		/*
+		 * MapSqlParameterSource params = new MapSqlParameterSource();
+		 * params.addValue("id", id); return jdbc .queryForObject(
+		 * "select * from offers, users where offers.username=users.username and id = :id"
+		 * , params, new OfferRowMapper());
+		 */
 		// queryForObject devuelve 1 valor
 		// parametros se definen con : como :name
 		/*
